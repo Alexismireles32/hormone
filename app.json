@@ -18,6 +18,9 @@
     "ios": {
       "bundleIdentifier": "com.hormoiq.app",
       "supportsTablet": true,
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "infoPlist": {
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized health insights.",
         "UIBackgroundModes": [
