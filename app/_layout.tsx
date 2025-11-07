@@ -1,27 +1,29 @@
 import { Tabs } from 'expo-router';
 import { AuthProvider } from '../components/AuthProvider';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 export default function Layout() {
   return (
-    <AuthProvider>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: '#000000',
-          tabBarInactiveTintColor: '#888888',
-          tabBarStyle: {
-            backgroundColor: '#ffffff',
-            borderTopColor: '#e0e0e0',
-            borderTopWidth: 1,
-          },
-          headerStyle: {
-            backgroundColor: '#ffffff',
-          },
-          headerTintColor: '#000000',
-          headerTitleStyle: {
-            fontWeight: '600',
-          },
-        }}
-      >
+    <ErrorBoundary>
+      <AuthProvider>
+        <Tabs
+          screenOptions={{
+            tabBarActiveTintColor: '#000000',
+            tabBarInactiveTintColor: '#888888',
+            tabBarStyle: {
+              backgroundColor: '#ffffff',
+              borderTopColor: '#e0e0e0',
+              borderTopWidth: 1,
+            },
+            headerStyle: {
+              backgroundColor: '#ffffff',
+            },
+            headerTintColor: '#000000',
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+          }}
+        >
         <Tabs.Screen
           name="index"
           options={{
@@ -66,6 +68,7 @@ export default function Layout() {
         />
       </Tabs>
     </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

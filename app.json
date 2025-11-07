@@ -1,34 +1,69 @@
 {
   "expo": {
-    "name": "hormone",
+    "name": "HormoIQ",
     "slug": "hormone",
     "version": "1.0.0",
-    "scheme": "hormone",
+    "scheme": "hormoiq",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "description": "Your personal hormone optimization platform. Track, optimize, and understand your hormone health with AI-powered insights.",
+    "primaryColor": "#2563EB",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.hormoiq.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized health insights.",
+        "UIBackgroundModes": [
+          "remote-notification"
+        ]
+      }
     },
     "android": {
+      "package": "com.hormoiq.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE",
+        "USE_EXACT_ALARM",
+        "SCHEDULE_EXACT_ALARM"
+      ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#2563EB",
+          "sounds": [],
+          "mode": "production"
+        }
+      ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "51217e97-95d9-4d57-a3eb-fa2437fc508d"
+      }
+    },
+    "owner": "alexismrls"
   }
 }
