@@ -1,0 +1,191 @@
+# HormoIQ Development Rules for Cursor AI
+
+## Project Context
+You are building HormoIQ - a category-defining hormone optimization platform. This is not a generic tracking app. Every feature must be intelligent, habit-forming, and compound in value over time.
+
+## Core Principles
+
+### 1. Intelligence Over Features
+- Every feature must learn from user data
+- Proactive insights over reactive responses
+- Show patterns, don't just display numbers
+- Always include confidence levels on predictions
+
+### 2. Retention First
+- Every component must answer: "Why would they open the app tomorrow?"
+- Build for daily habits, not occasional use
+- Variable rewards (sometimes surprising, sometimes expected)
+- Progressive unlocks that reveal value over time
+
+### 3. Quality Over Speed
+- Make it work, then make it smart, then make it delightful
+- Every interaction should feel premium
+- Micro-interactions matter (haptics, animations, sounds)
+- Performance is a feature (instant feedback, <100ms interactions)
+
+## Code Standards
+
+### TypeScript
+- Strict mode always enabled
+- Define interfaces for all data structures
+- No `any` types unless absolutely necessary
+- Use enums for constants (hormone types, score ranges, etc.)
+
+### React Native Best Practices
+- Functional components only (no class components)
+- Use hooks appropriately (useState, useEffect, useMemo, useCallback)
+- Memoize expensive computations
+- Keep components under 200 lines (split if larger)
+
+### State Management (Zustand)
+- Single store per domain (testStore, userStore, etc.)
+- Actions colocated with state
+- Selectors for derived state
+- Persist to AsyncStorage in background (optimistic UI)
+
+### Performance
+- Lazy load tabs (don't load Track code until user navigates there)
+- Use React.memo for expensive renders
+- Virtualized lists for long data sets
+- Pre-calculate expensive operations (BioAge, correlations) in background
+- Cache aggressively, invalidate smartly
+
+### Styling
+- Consistent spacing: 4px, 8px, 16px, 24px, 32px, 48px
+- Border radius: 8px (inputs), 12px (buttons), 16px (cards)
+- Colors: Use variables, never hard-coded hex values
+- Minimum touch target: 44x44 pixels
+- Support both light and dark modes (future)
+
+## UI/UX Rules
+
+### Animations
+- Numbers should count up (don't just appear)
+- Charts should draw in smoothly
+- Use physics-based spring animations
+- Progress rings animate their fill
+- Loading states should educate ("Analyzing your last 30 tests...")
+
+### Haptics
+- Light tap for selections
+- Medium tap for saves
+- Heavy tap for milestones
+- Success pattern for completions
+
+### Empty States
+- Never just say "No data"
+- Show what it will look like when populated
+- Include clear call-to-action
+- Make them helpful and educational
+
+### Error Handling
+- User-friendly messages (not technical errors)
+- Always suggest a fix or next step
+- Auto-retry with exponential backoff
+- Graceful degradation (show cached data if offline)
+
+## Feature Development
+
+### Before Starting Any Feature
+1. Read PRD.md to understand the full context
+2. Understand the retention mechanics involved
+3. Plan the intelligence/learning aspects
+4. Consider the micro-interactions
+
+### Test Flow Priority
+1. Make it functional
+2. Add intelligence (smart defaults, validation, insights)
+3. Add polish (animations, haptics, delightful details)
+4. Test on actual device (not just simulator)
+
+### Always Include
+- Loading states (never just spinners)
+- Error states (helpful, actionable messages)
+- Empty states (educational, with CTA)
+- Success states (celebrate wins)
+
+## Data & Intelligence
+
+### Pattern Recognition
+- Minimum 5 data points before claiming pattern
+- Calculate statistical significance (p < 0.05)
+- Show confidence intervals
+- Account for time-lagged effects
+
+### Personalization
+- Start with population averages (priors)
+- Update with user data (Bayesian approach)
+- Show: "X% population average, Y% your personal data"
+- Confidence increases with more data
+
+### Smart Defaults
+- Pre-fill based on time of day and patterns
+- Suggest supplements they've mentioned before
+- Auto-detect testing times and contexts
+- Learn from behavior (when they usually test)
+
+## Specific Implementation Notes
+
+### Test Entry Form
+- Optimistic UI (save immediately to state, persist in background)
+- Validate ranges (positive numbers, reasonable values)
+- Flag anomalies (>40% from average) and ask for confirmation
+- Auto-complete on supplements (learn from history)
+
+### ReadyScore Calculation
+- Start at 50 baseline
+- Add/subtract based on hormone optimization
+- Factor in recovery indicators (sleep, stress)
+- Include trend bonus (improving vs declining)
+- Clamp between 0-100
+
+### AI Chat Integration
+- Include full user context in system prompt (tests, patterns, goals)
+- Stream responses (don't wait for complete answer)
+- Store chat history locally
+- Suggested questions should be dynamic (based on their data)
+- Proactive messages (morning greeting with ReadyScore)
+
+### Charts
+- Use Victory Native or Recharts Native
+- Animate draw-in (smooth easing)
+- Color-code by status (optimal/borderline/concern)
+- Show trend arrows (improving/stable/declining)
+- Tap data points for detail
+
+## What NOT to Do
+
+❌ Build features without retention mechanics
+❌ Show data without insights
+❌ Use generic messages (personalize everything)
+❌ Ignore loading/error/empty states
+❌ Hard-code values that should be calculated
+❌ Display confidence without basis
+❌ Make claims without statistical backing
+❌ Add unnecessary complexity
+❌ Optimize prematurely (make it work first)
+❌ Forget to test on actual device
+
+## Testing Checklist
+
+Before considering any feature "done":
+- [ ] Works on device (not just simulator)
+- [ ] Handles edge cases (0 tests, 1 test, 100+ tests)
+- [ ] Loading states implemented
+- [ ] Error states handled gracefully
+- [ ] Empty states are helpful
+- [ ] Animations feel smooth (60fps)
+- [ ] Data persists across app restarts
+- [ ] TypeScript types are correct
+- [ ] Performance is acceptable (<100ms interactions)
+- [ ] Accessibility: proper touch targets, labels
+
+## Remember
+
+You're building something that will be used daily for years. Every decision should optimize for:
+1. Long-term retention
+2. Compounding intelligence
+3. User delight
+4. Data quality
+
+**This is a personal biologist that gets smarter every day. Build it like one.**
